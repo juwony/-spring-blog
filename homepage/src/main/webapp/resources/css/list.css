@@ -1,0 +1,41 @@
+thead th {
+	color: #AFAFAF;
+	border-bottom: 2px solid #999999;
+	padding: 5px;
+}
+	
+tr td {
+	border-bottom: 1px solid #E1E1E1;
+	padding: 5px;
+}
+	
+td a {
+	color: #333333;
+	text-decoration: none;
+}
+	
+td a:hover {
+	color: #333333;
+	text-decoration: underline;
+}
+	
+.paging {
+	float: left;
+	width: 100%;
+	text-align: center;
+}
+		
+.paging-body {
+	display: inline-block;
+}
+		
+.pagination {
+	text-align: center;
+}
+
+.pagination a {
+  color: #333333;
+  float: left;
+  text-decoration: none;
+  font-weight: bold;
+}

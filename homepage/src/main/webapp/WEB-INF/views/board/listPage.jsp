@@ -6,29 +6,7 @@
 <head>
 <meta charset="EUC-KR">
 <title>게시물 목록</title>
-<style>
-	thead th {
-		color: #AFAFAF;
-		border-bottom: 2px solid #999999;
-		padding: 5px;
-	}
-	
-	tr td {
-		border-bottom: 1px solid #E1E1E1;
-		padding: 5px;
-	}
-	
-	td a {
-		color: #333333;
-		text-decoration: none;
-	}
-	
-	td a:hover {
-		color: #333333;
-		text-decoration: underline;
-	}
-	
-</style>
+<link rel="stylesheet" href="/resources/css/list.css">
 </head>
 <body>
 <%@ include file = "../include/bootstrap.jsp" %>
@@ -59,6 +37,16 @@
 		</tbody>
 		
 	</table>
+	
+	<div class="paging py-3">
+		<div class="paging-body">
+			<ul class="pagination">
+				<c:forEach begin="1" end="${pageNum}" var="num">
+					<li class="px-1"><a class="page-link" href="/board/listPage?num=${num}">${num}</a></li>
+				</c:forEach>
+			</ul>
+		</div>
+	</div>
 </div>
 </body>
 </html>
