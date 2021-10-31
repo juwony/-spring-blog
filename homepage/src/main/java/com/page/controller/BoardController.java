@@ -6,11 +6,13 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.page.domain.BoardVO;
+import com.page.domain.Criteria;
+import com.page.domain.Page;
 import com.page.service.BoardService;
 
 @Controller
@@ -31,22 +33,16 @@ public class BoardController {
 	
 	// 게시물 목록 + 페이징
 	@RequestMapping(value = "/listPage", method = RequestMethod.GET)
-	public void getListPage(Model model, @RequestParam("num") int num) throws Exception {
-		// 게시물 총 갯수
-		int count = service.count();
-			
-		// 한 페이지에 출력할 게시물 갯수
-		int postNum = 5;
-			
-		// 하단 페이징 번호 ([ 게시물 총 갯수 / 한 페이지에 출력할 갯수 ]의 올림)
-		int pageNum = (int)Math.ceil((double)count/postNum);
-			
-		// 출력할 게시물
-		int displayPost = (num - 1) * postNum;
-			
+	public void getListPage(@ModelAttribute("cri") Criteria cri, Model model) throws Exception {
+		
 		List<BoardVO> list = null;
-		list = service.listPage(displayPost, postNum);
+		list = service.listPage(cri);
 		model.addAttribute("list", list);
-		model.addAttribute("pageNum", pageNum);
+		
+		Page page = new Page();
+		page.setCri(cri);
+		page.setTotalCount(service.count());
+		
+		model.addAttribute("page", page);
 	}
 }

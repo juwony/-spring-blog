@@ -37,5 +37,10 @@ td a:hover {
   color: #333333;
   float: left;
   text-decoration: none;
-  font-weight: bold;
+}
+
+.boardTitle a {
+	color: #333333;
+	text-decoration: none;
+	font-weight: bold;
 }

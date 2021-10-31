@@ -11,7 +11,16 @@
 <body>
 <%@ include file = "../include/bootstrap.jsp" %>
 <div class="container">
-	<table class="mt-3">
+	<div class="row">
+		<div class="col-md-8 boardTitle">
+			<a href="/board/listPage?page=1&perPageNum=5">전체보기</a> ${page.totalCount}개의 글
+		</div>
+		<div class="col-md-4">
+			<span style="float: right;">목록 열기</span>
+		</div>
+	</div>
+	<div class="table-responsive">
+	<table class="mt-3 mx-auto" style="width: 100%;">
 		<colgroup>
 			<col style="width: 50%;"/>
 			<col style="width: 7%;"/>
@@ -37,13 +46,21 @@
 		</tbody>
 		
 	</table>
-	
+	</div>
 	<div class="paging py-3">
 		<div class="paging-body">
 			<ul class="pagination">
-				<c:forEach begin="1" end="${pageNum}" var="num">
-					<li class="px-1"><a class="page-link" href="/board/listPage?num=${num}">${num}</a></li>
+				<c:if test="${page.prev}">
+					<li class="px-1"><span>&lt; <a class="page-link" href="/board/listPage${page.makeQuery(page.startPage - 1)}">이전</a></span></li>
+				</c:if>
+					
+				<c:forEach begin="${page.startPage}" end="${page.endPage}" var="num">
+					<li class="px-1"><a class="page-link" href="/board/listPage${page.makeQuery(num)}">${num}</a></li>
 				</c:forEach>
+					
+				<c:if test="${page.next}">
+					<li class="px-1"><span><a class="page-link" href="/board/listPage${page.makeQuery(pageMaker.endPage + 1)}">다음</a> &gt;</span></li>
+				</c:if>
 			</ul>
 		</div>
 	</div>

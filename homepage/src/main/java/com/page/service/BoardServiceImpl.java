@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.page.dao.BoardDAO;
 import com.page.domain.BoardVO;
+import com.page.domain.Criteria;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -31,9 +32,9 @@ public class BoardServiceImpl implements BoardService {
 	
 	// 게시물 목록 + 페이징
 	@Override
-	public List<BoardVO> listPage(int displayPost, int postNum) throws Exception {
+	public List<BoardVO> listPage(Criteria cri) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.listPage(displayPost, postNum);
+		return dao.listPage(cri);
 	}
 
 }

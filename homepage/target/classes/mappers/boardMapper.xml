@@ -22,12 +22,17 @@
 	</select>
 	
 	<!-- 게시물 목록 + 페이징 -->
-	<select id="listPage" parameterType="hashMap" resultType="com.page.domain.BoardVO">
+	<select id="listPage" resultType="com.page.domain.BoardVO" parameterType="com.page.domain.Criteria">
 		select
 			bno, title, writer, regDate, viewCnt
-		from
-			tbl_board
+		from ( 
+			select
+				bno, title, writer, regDate, viewCnt, row_number() over(order by bno desc) as rNum
+			from
+				tbl_board
+			) tb
+		where
+			rNum between #{rowStart} and #{rowEnd}
 		order by bno desc
-			limit #{displayPost}, #{postNum}
 	</select>	
 </mapper>
